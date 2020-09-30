@@ -8,13 +8,14 @@ ex input: 111222289
 "three ones three fours one eight one nine" 
 outputs: 31421819
 """
-
 def Print_Outloud(digit_list, counter_list):
-    if len(digit_list) != len(counter_list):
-        raise Exception("wrong logic for counting, fix bug")
-    else:
-        for i in range(len(digit_list)):
+    # make sure the length of the digits and the counter lists are the same 
+    # they have to be!     
+    assert len(digit_list) == len(counter_list), "wrong logic for counting, fix bug"
+
+    for i in range(len(digit_list)):
             print(f"{counter_list[i]}{digit_list[i]}", end='')
+
 
 def ReadOutloud(numbers):
 
