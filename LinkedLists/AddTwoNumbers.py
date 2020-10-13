@@ -18,49 +18,37 @@ class ListNode(object):
         self.next = next
     
     def addTwoNumbers(self, l1, l2):
-        """
-        :type l1: ListNode
-        :type l2: ListNode
-        :rtype: ListNode
-        """
-        # question says non-empty, so I will not do the checks         
-        counter1 = 1;
-        counter2 = 1;        
-        running_num1 = 0;
-        running_num2 = 0;
+        running_sum = 0;
+        tens = 1;
+        while l1 is not None and l2 is not None:
+            running_sum += (l1.val + l2.val)*tens;
+            tens *=10;
+            l1 = l1.next; l2 = l2.next;
+        
+        # only one of these cases will be true!
         
         while l1 is not None:
-             # this way we get the right positioning
-            running_num1 += l1.val * (counter1);
-            counter1 *= 10;
+            running_sum += l1.val * tens;
+            tens *=10;
             l1 = l1.next;
         
         while l2 is not None:
-            # this way we get the right positioning
-            running_num2 += l2.val * (counter2);
-            counter2 *= 10;
+            running_sum+= l2.val * tens;
+            tens *=10;
             l2 = l2.next;
-            
-        # now to get the sum of the two:
-        sum_both = running_num1 + running_num2;
-        # now get the individual digits
-        back_dig = [int(d) for d in str(sum_both)];
-        #flip the array
-        back_dig  = back_dig[::-1];
-        node_list = [ListNode(d) for d in back_dig];
         
-        i = 0;
-        for node in node_list:
-            i+=1;
-            if i < len(node_list):
-                node.next= node_list[i];
-            else:
-                node.next = None;
-                
-        return node_list[0];
+        # now here make it a linked list
+        iter_num = str(running_sum);
+        iter_num = iter_num[::-1];
+        new_head = ListNode();
+        new_next = ListNode(iter_num[0]);
+        new_head.next = new_next;
+        for i in range(1,len(iter_num)):
+            new_next.next = ListNode(int(iter_num[i]));
+            new_next = new_next.next;
         
         
-        
+        return new_head.next;
     
     def Print(self):
         temp = self;
