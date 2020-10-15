@@ -31,6 +31,24 @@ The height of the n-ary tree is less than or equal to 1000
 The total number of nodes is between [0, 10^4]
 
 """
+## iterative solution
+class Solution:
+    def __init__(self):
+        self.nodes = [];
+    
+    def preorder(self, root: 'Node') -> List[int]:
+        # if root is None return
+        if not root:
+            return;
+        visited = [root, ];
+        # pre order is : root, left, right
+        while visited:
+            root = visited.pop();
+            self.nodes.append(root.val);
+            visited.extend(root.children[::-1]);
+            
+        return self.nodes;
+
 
 ## recursive solution
 

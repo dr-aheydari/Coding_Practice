@@ -31,7 +31,31 @@ The height of the n-ary tree is less than or equal to 1000
 The total number of nodes is between [0, 10^4]
 
 """
-# recursive
+#### Iterative solution
+class Solution:
+    def __init__(self):
+        self.nodes = [];
+    
+    def postorder(self, root: 'Node') -> List[int]:
+        
+        # if root is None, return
+        if not root:
+            return;
+        
+        visited = [root, ];
+        #postorder is left, right, root
+        while visited:
+            root = visited.pop();
+            if root:
+                self.nodes.append(root.val);
+            for child in root.children:
+                visited.append(child);
+        
+        # we want to return it backwards, since we stored it from top down
+        return self.nodes[::-1];
+
+
+## recursive
 class Solution:
     def __init__(self):
         self.nodes = [];
